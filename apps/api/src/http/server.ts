@@ -16,6 +16,8 @@ import {
   createAccount,
   getProfile,
 } from './routes/auth'
+import { requestPasswordRecover } from './routes/auth/request-password-recover'
+import { resetPassword } from './routes/auth/reset-password'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -49,6 +51,8 @@ app.register(fastifyCors)
 app.register(createAccount)
 app.register(authenticateWithPassword)
 app.register(getProfile)
+app.register(requestPasswordRecover)
+app.register(resetPassword)
 
 app.listen({ port: 3333 }).then(() => {
   console.log('HTTP Server Running!')
