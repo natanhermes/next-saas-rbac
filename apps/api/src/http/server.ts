@@ -11,23 +11,25 @@ import {
   ZodTypeProvider,
 } from 'fastify-type-provider-zod'
 
-import { errorHandler } from './error-handler'
 import {
   authenticateWithPassword,
   createAccount,
   getProfile,
-} from './routes/auth'
-import { authenticateWithGithub } from './routes/auth/authenticate-with-github'
-import { requestPasswordRecover } from './routes/auth/request-password-recover'
-import { resetPassword } from './routes/auth/reset-password'
-import { createOrganization } from './routes/orgs/create-organization'
-import { getMembership } from './routes/orgs/get-membership'
-import { getOrganization } from './routes/orgs/get-organization'
-import { getOrganizations } from './routes/orgs/get-organizations'
-import { shutdownOrganization } from './routes/orgs/shutdown-organization'
-import { transferOrganization } from './routes/orgs/transfer-organization'
-import { updateOrganization } from './routes/orgs/update-organization'
-import { createProject } from './routes/projects/create-project'
+} from '@/http/routes/auth'
+import { authenticateWithGithub } from '@/http/routes/auth/authenticate-with-github'
+import { requestPasswordRecover } from '@/http/routes/auth/request-password-recover'
+import { resetPassword } from '@/http/routes/auth/reset-password'
+import { createOrganization } from '@/http/routes/orgs/create-organization'
+import { getMembership } from '@/http/routes/orgs/get-membership'
+import { getOrganization } from '@/http/routes/orgs/get-organization'
+import { getOrganizations } from '@/http/routes/orgs/get-organizations'
+import { shutdownOrganization } from '@/http/routes/orgs/shutdown-organization'
+import { transferOrganization } from '@/http/routes/orgs/transfer-organization'
+import { updateOrganization } from '@/http/routes/orgs/update-organization'
+import { createProject } from '@/http/routes/projects/create-project'
+import { deleteProject } from '@/http/routes/projects/delete-project'
+
+import { errorHandler } from './error-handler'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -82,6 +84,7 @@ app.register(shutdownOrganization)
 app.register(transferOrganization)
 
 app.register(createProject)
+app.register(deleteProject)
 
 app.listen({ port: env.SERVER_PORT }).then(() => {
   console.log('HTTP Server Running!')
